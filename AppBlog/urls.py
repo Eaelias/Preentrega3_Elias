@@ -1,5 +1,5 @@
 """
-URL configuration for Preentrega3_elias project.
+URL configuration for AppBlog project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,10 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Preentrega3_elias.views import show_html
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('show/',show_html),
+    path('show/', show_html),
 ]
- 
