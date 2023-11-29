@@ -14,3 +14,8 @@ class Reader(models.Model):
     user_id = models.IntegerField(unique=True)
     email = models.EmailField()
 
+class Contact(models.Model):
+    name = models.CharField (max_length=30)
+    email = models.EmailField (max_length=30)
+    phone_number = models.CharField(max_length=30)
+    message = models.TextField (max_length=500)

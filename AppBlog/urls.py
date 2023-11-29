@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from AppBlog.views import show_html, contact
 
 urlpatterns = [
-    path('show/', show_html),
+    path('show/',show_html),
+    path('contact/',contact)
 ]
