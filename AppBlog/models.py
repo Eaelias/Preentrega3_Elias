@@ -9,7 +9,7 @@ class Author(models.Model):
     apellido = models.CharField(max_length=30)
     email = models.EmailField()
 
-class reader(models.Model):
+class Reader(models.Model):
     username = models.CharField(max_length=20)
     user_id = models.IntegerField(unique=True)
     email = models.EmailField()

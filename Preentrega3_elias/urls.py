@@ -20,6 +20,6 @@ from Preentrega3_elias.views import show_html
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('show/',show_html),
+    path('show/', show_html),
+    path('index/', index)
 ]
- 
