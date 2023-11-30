@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Readers</h1>
+    <ul>
+        {% for Reader in object_list %}
+            <li>{{Reader.username}}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}  

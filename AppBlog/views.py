@@ -1,13 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Post, Author, Reader
-from .forms import PostForm, ReaderForm, AuthorForm
+from .forms import PostForm, ReaderForm, AuthorForm, SearchForm
 from django.views.generic import ListView
 
 def index(request):
     post = Post.objects.all()
     author = Author.objects.all()
-    return render(request, 'index.html', {'post': post,'author': author})
+    reader = Reader.objects.all()
+    return render(request, 'index.html', {'post': post,'author': author, 'reader': reader})
 
 def contact(request):
     context = {}
@@ -29,7 +30,7 @@ def create_post(request):
             return redirect('index')
     else:
         post_form = PostForm()
-    return render(request,'AppBlog/create_post.html',{'form': post_form})
+    return render(request,'AppBlog/create_post.html',{'post_form': post_form})
 
 def add_author(request):
     if request.method == 'POST':
@@ -39,7 +40,7 @@ def add_author(request):
             return redirect('index')
     else:
         author_form = AuthorForm()
-    return render(request,'AppBlog/create_post.html',{'form': author_form})
+    return render(request,'AppBlog/add_author.html',{'author_form': author_form})
 
 def add_reader(request):
     if request.method == 'POST':
@@ -49,11 +50,27 @@ def add_reader(request):
             return redirect('index')
     else:
         reader_form = ReaderForm()
-    return render(request,'AppBlog/create_post.html',{'form': reader_form})
+    return render(request,'AppBlog/add_reader.html',{'reader_form': reader_form})
 
-class List(ListView):
+class PostList(ListView):
     model = Post
-    template_name = 'list.html'
+    template_name = 'post_list.html'
+    
+class AuthorList(ListView):
+    model = Author
+    template_name = 'author_list.html'
+
+class ReaderList(ListView):
+    model = Reader
+    template_name = 'reader_list.html'
+
+def search_post(request):
+    search_form = SearchForm(request.GET or None)
+    results = Post.objects.all()
+    if search_form.is_valid():
+        query = search_form.cleaned_data['query']
+        results = Post.objects.filter(title__icontains=query)
+    return render(request, 'search_post.html', {'search_form': search_form, 'results': results})
 
 def page_not_found(request):
     return render(request, '404.html')

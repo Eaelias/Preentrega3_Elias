@@ -1,0 +1,20 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h2>Search Post</h2>
+    <form method="get" action="{% url 'search_post' %}">
+        {{ search_form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h3>Posts:</h3>
+        <ul>
+        {% for Post in results %}
+            <li>{{ Post.title }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matching Posts have been found</p>
+    {% endif %}
+{% endblock %}

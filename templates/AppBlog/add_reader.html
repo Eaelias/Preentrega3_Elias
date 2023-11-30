@@ -2,9 +2,9 @@
 
 {% block content %}
 <h2>Add Reader</h2>
-    <form method="reader" action="{% url 'add_reader' %}">
+    <form method="POST" action="{% url 'add_reader' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ reader_form.as_p }}
         <button type="submit">Add</button>
     </form>
     <a href="{% url 'index' %}">Return home</a>

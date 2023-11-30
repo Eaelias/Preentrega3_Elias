@@ -20,3 +20,6 @@ class ReaderForm(forms.ModelForm):
     class Meta:
         model = Reader
         fields = ['username', 'user_id', 'email']
+
+class SearchForm(forms.Form):
+    query = forms.CharField(label='Search_Form', max_length=100)
