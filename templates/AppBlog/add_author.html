@@ -1,0 +1,11 @@
+{% extends 'AppBlog/base.html' %}
+
+{% block content %}
+<h2>Add Author</h2>
+    <form method="author" action="{% url 'add_author' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+    </form>
+    <a href="{% url 'index' %}">Return home</a>
+{% endblock %}
