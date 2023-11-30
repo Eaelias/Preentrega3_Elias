@@ -3,10 +3,11 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField(max_length=80)
     post_id = models.IntegerField(unique=True)
+    post_text = models.TextField(max_length=10000)
 
 class Author(models.Model):
-    nombre = models.CharField(max_length=30)
-    apellido = models.CharField(max_length=30)
+    name = models.CharField(max_length=30)
+    lastname = models.CharField(max_length=30)
     email = models.EmailField()
 
 class Reader(models.Model):
