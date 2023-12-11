@@ -1,0 +1,11 @@
+{% extends 'AppBlog/base.html' %}
+
+{% block content %}
+<h2>Add Post</h2>
+    <form method="POST" action="{% url 'add_post' %}">
+        {% csrf_token %}
+        {{ post_form.as_p }}
+        <button type="submit">Create</button>
+    </form>
+    <a href="{% url 'index' %}">Return home</a>
+{% endblock %}

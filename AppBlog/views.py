@@ -2,7 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Post, Author, Reader
 from .forms import PostForm, ReaderForm, AuthorForm, SearchForm
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
     post = Post.objects.all()
@@ -22,7 +23,9 @@ def post(request):
     context = {}
     return render(request, 'AppBlog/post.html', context)
 
-def create_post(request):
+# To do: Change into class based view
+
+def create_post(request, LoginRequiredMixin):
     if request.method == 'POST':
         post_form = PostForm(request.POST)
         if post_form.is_valid():
@@ -71,6 +74,21 @@ def search_post(request):
         query = search_form.cleaned_data['query']
         results = Post.objects.filter(title__icontains=query)
     return render(request, 'search_post.html', {'search_form': search_form, 'results': results})
+
+# To do: Create funtionality, replace index and listview
+
+class HomeView(ListView):
+    model = Post
+    template_name =  'home.html'
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'post_detail.html'
+
+class AddPostView(CreateView):
+    model = Post
+    template_name = 'add_post.html'
+    fields = '__all__'
 
 def page_not_found(request):
     return render(request, '404.html')
