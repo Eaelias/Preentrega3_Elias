@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Post, Author, Reader
 from .forms import PostForm, ReaderForm, AuthorForm, SearchForm
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
 def index(request):
     post = Post.objects.all()
@@ -22,18 +23,6 @@ def about(request):
 def post(request):
     context = {}
     return render(request, 'AppBlog/post.html', context)
-
-# To do: Change into class based view
-
-def create_post(request, LoginRequiredMixin):
-    if request.method == 'POST':
-        post_form = PostForm(request.POST)
-        if post_form.is_valid():
-            post = post_form.save()
-            return redirect('index')
-    else:
-        post_form = PostForm()
-    return render(request,'AppBlog/create_post.html',{'post_form': post_form})
 
 def add_author(request):
     if request.method == 'POST':
@@ -79,16 +68,27 @@ def search_post(request):
 
 class HomeView(ListView):
     model = Post
-    template_name =  'home.html'
+    template_name =  'AppBlog/home.html'
+    ordering = ['-id']
 
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'post_detail.html'
+    template_name = 'AppBlog/post_detail.html'
 
-class AddPostView(CreateView):
+class AddPostView(CreateView, LoginRequiredMixin):
     model = Post
-    template_name = 'add_post.html'
-    fields = '__all__'
+    form_class = PostForm
+    template_name = 'AppBlog/add_post.html'
+
+class EditPostView(UpdateView, LoginRequiredMixin):
+    model = Post
+    template_name = 'AppBlog/edit_post.html'
+    fields = ['title', 'body']
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = "AppBlog/delete_post.html"
+    success_url = reverse_lazy('home')
 
 def page_not_found(request):
     return render(request, '404.html')

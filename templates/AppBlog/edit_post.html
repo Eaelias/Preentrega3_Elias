@@ -1,10 +1,10 @@
 {% extends 'AppBlog/base.html' %}
 
 {% block content %}
-<h2>Add Post</h2>
-    <form method="POST" action="{% url 'add_post' %}">
+<h2>Edit Post</h2>
+    <form method="POST" action="{% url 'edit_post' post.pk %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Create</button>
+        <button type="submit">Update</button>
     </form>
 {% endblock %}

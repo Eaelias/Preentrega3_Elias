@@ -1,0 +1,14 @@
+{% extends 'AppBlog/base.html' %}
+
+{% block content %}
+    <h1>Posts</h1>
+    <ul>
+        {% for Post in object_list %}
+            <li><a href= "{% url 'post_detail' Post.pk %}">{{ Post.title }} - {{ Post.author }} - 
+                <small><a href="{% url 'edit_post' Post.pk %}">(Edit)</a></small></br>
+                <small><a href="{% url 'delete_post' Post.pk %}">(Delete)</a></small></br>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}  
+

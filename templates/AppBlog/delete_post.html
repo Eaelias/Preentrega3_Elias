@@ -1,0 +1,10 @@
+{% extends 'AppBlog/base.html' %}
+
+{% block content %}
+<h2>Delete Post</h2>
+    <form method="POST" action="{% url 'delete_post' post.pk %}">
+        {% csrf_token %}
+        <strong> Are you sure you want to delete {{ post.title }}? </strong>
+        <button type="submit">Delete Post</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'AppBlog/base.html' %}
+
+{% block content %}
+    <h1> {{ post.title }} </h1>
+    <small> By: {{ post.author }} </small> </br>
+    {{ post.body }}
+    <a href="{% url 'edit_post' post.pk %}">Edit</a>
+{% endblock %}
+
