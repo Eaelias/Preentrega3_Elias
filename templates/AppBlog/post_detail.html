@@ -23,14 +23,18 @@
         {{ comment.body }}
         <br>
         <small>{{ comment.name }} - {{ comment.date_added }}</small>
-                
+        <br>
+        <br>
         {% endfor %}
-        <br></br>
+        <br>
     {% endif %}
     {% if user.is_authenticated %}
+    <br>
     Add a comment:
-    <a class="btn btn-primary btn-sm" href="#">Comment</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'add_comment' post.pk %}">Comment</a>
     {% endif %}
 
 {% endblock %}
+
+
 
