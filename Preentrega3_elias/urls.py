@@ -23,5 +23,6 @@ urlpatterns = [
     path('', index, name='index'),
     path('index', index, name='index'),
     path('AppBlog/', include('AppBlog.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
 ]

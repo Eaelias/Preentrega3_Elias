@@ -1,9 +1,9 @@
 from django.urls import path
-from accounts.views import login_request, register_request
+from accounts.views import UserRegisterForm
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
-    path('login/', login_request, name='login'),
-    path('register/', register_request, name='register'),
-    path('logout/', LogoutView.as_view(template_name="accounts/logout.html"), name='logout'),
+    path('register/', UserRegisterForm.as_view(), name='register'),
+    path('logout/', LogoutView.as_view(template_name="registration/logout.html"), name='logout'),
+    path('profile/', LogoutView.as_view(template_name="registration/profile.html"), name='logout'),
 ]

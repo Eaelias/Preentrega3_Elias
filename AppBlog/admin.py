@@ -1,7 +1,7 @@
 from django.contrib import admin
-from AppBlog.models import Author, Reader, Post, Contact
+from AppBlog.models import Post, Contact, Category, Comment
 
-admin.site.register(Author)
-admin.site.register(Reader)
 admin.site.register(Post)
 admin.site.register(Contact)
+admin.site.register(Category)
+admin.site.register(Comment)

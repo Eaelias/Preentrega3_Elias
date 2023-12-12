@@ -1,10 +1,17 @@
 {% extends 'AppBlog/base.html' %}
 
 {% block content %}
-<h2>Add Post</h2>
-    <form method="POST" action="{% url 'add_post' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create</button>
-    </form>
+    {% if user.is_authenticated %}
+            <h2>Add Post</h2>
+                <form method="POST" action="{% url 'add_post' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-primary" type="submit">Create</button>
+                </form>
+            <script>
+                var name = "{{ user.id }}";
+                document.getElementById("authorid").value
+                    =name;
+            </script>
+    {% endif %}
 {% endblock %}

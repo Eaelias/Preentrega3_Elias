@@ -2,8 +2,35 @@
 
 {% block content %}
     <h1> {{ post.title }} </h1>
-    <small> By: {{ post.author }} </small> </br>
+    <small> By: {{ post.author }} - {{ post.post_date }} 
+        {% if user.is_authenticated %}
+            {% if user.id == post.author.id %} - 
+                <small><a class="btn btn-outline-secondary btn-sm" href="{% url 'edit_post' post.pk %}">Edit</a></small>
+                <small><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_post' post.pk %}">Delete</a></small></br>
+            {% endif %}
+        {% endif %}
+    </small> </br>
     {{ post.body }}
-    <a href="{% url 'edit_post' post.pk %}">Edit</a>
+    <br></br>
+    <hr></hr>
+    
+    <h2>Comments</h2>
+
+    {% if not post.comments.all %}
+        No comments yet
+    {% else %}
+        {%for comment in post.comments.all %}
+        {{ comment.body }}
+        <br>
+        <small>{{ comment.name }} - {{ comment.date_added }}</small>
+                
+        {% endfor %}
+        <br></br>
+    {% endif %}
+    {% if user.is_authenticated %}
+    Add a comment:
+    <a class="btn btn-primary btn-sm" href="#">Comment</a>
+    {% endif %}
+
 {% endblock %}
 
