@@ -61,7 +61,7 @@ class AddCommentView(CreateView, LoginRequiredMixin):
         form.instance.post_id = self.kwargs['pk']
         form.instance.name = self.request.user
         return super().form_valid(form)
-#    success_url = redirect('post/', pk=Comment..post_id)
+    success_url = reverse_lazy('home')
 
 #To do Create category selection menu
 

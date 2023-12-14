@@ -4,18 +4,20 @@
     <h1>Posts</h1>
     <ul>
         {% for Post in object_list %}
-            <li>
-                <a href= "{% url 'post_detail' Post.pk %}">{{ Post.title }} </a>
-                    <small> - By: {{ Post.author }} - {{ Post.category }}
-                        </br>{{ Post.body|slice:":50" }}..."
-                    </small>
-                    {% if user.is_authenticated %}
-                        {% if user.id == Post.author.id %} - 
-                            <small><a class="btn btn-outline-secondary btn-sm" href="{% url 'edit_post' Post.pk %}">Edit</a></small>
-                            <small><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_post' Post.pk %}">Delete</a></small></br>
-                        {% endif %}
+        <li>
+            <a href= "{% url 'post_detail' Post.pk %}">{{ Post.title }} </a>
+                <small> - By: {{ Post.author }} - {{ Post.category }}
+                    </br>{{ Post.body|slice:":50" }}..."</small>
+                {% if user.is_authenticated %}
+                    {% if user.id == Post.author.id %} - 
+                        <small><a class="btn btn-outline-secondary btn-sm" href="{% url 'edit_post' Post.pk %}">Edit</a></small>
+                        <small><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_post' Post.pk %}">Delete</a></small></br>
                     {% endif %}
-            </li>
+                {% endif %}
+        </li>
+        {% empty %}
+            <a>There are no posts yet</a>
+
         {% endfor %}
     </ul>
 {% endblock %} 

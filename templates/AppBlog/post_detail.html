@@ -25,6 +25,8 @@
         <small>{{ comment.name }} - {{ comment.date_added }}</small>
         <br>
         <br>
+        {% empty %}
+        There are no comments yet
         {% endfor %}
         <br>
     {% endif %}
