@@ -17,6 +17,7 @@ Including another URLconf
 from django.urls import path
 from AppBlog.views import contact, about, post, search_post, HomeView, PostDetailView, AddPostView, EditPostView, DeletePostView, AddCommentView, CategoryList
 
+
 urlpatterns = [
     path('home', HomeView.as_view(), name='home'),
     path('contact/', contact, name='contact'),
