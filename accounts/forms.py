@@ -4,8 +4,21 @@ from django import forms
 
 
 class UserRegisterForm(UserCreationForm):
-    email = forms.EmailField(max_length=50)
+    username = forms.EmailField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+    first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+
 
     class Meta:
         model = User
-        fields = ("username", "email")
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+class EditProfileForm(UserCreationForm):
+    email = forms.EmailField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+    first_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+    last_name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
