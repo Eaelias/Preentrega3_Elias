@@ -1,14 +1,14 @@
 from django import forms
-from .models import Post, Contact, Comment
+from .models import Post, Contact, Comment, Category
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'body']
+        fields = ['title', 'category_name', 'body', 'post_image']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'category_name': forms.Select(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
@@ -28,3 +28,8 @@ class ContactForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     query = forms.CharField(label='Search_Form', max_length=100)
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = '__all__'

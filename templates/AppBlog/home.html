@@ -6,7 +6,7 @@
         {% for Post in object_list %}
         <li>
             <a href= "{% url 'post_detail' Post.pk %}">{{ Post.title }} </a>
-                <small> - By: {{ Post.author }} - {{ Post.category }}
+                <small> - By: {{ Post.author }} - {{ Post.category_name }}
                     </br>{{ Post.body|slice:":50" }}..."</small>
                 {% if user.is_authenticated %}
                     {% if user.id == Post.author.id %} - 
@@ -14,11 +14,9 @@
                         <small><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_post' Post.pk %}">Delete</a></small></br>
                     {% endif %}
                 {% endif %}
-            
         </li>
         {% empty %}
             <a>There are no posts yet</a>
-
         {% endfor %}
     </ul>
     <a class="btn btn-outline-primary btn-sm" href="{% url 'add_post' %}">Create Post</a>

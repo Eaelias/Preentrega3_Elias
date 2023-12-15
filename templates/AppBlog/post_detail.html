@@ -9,11 +9,17 @@
                 <small><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_post' post.pk %}">Delete</a></small></br>
             {% endif %}
         {% endif %}
-    </small> </br>
-    {{ post.body }}
-    <br></br>
+    </small>
+    </br>
+    <div class="col-md-10 col-lg-8 col-xl-7">
+        {{ post.body }}
+        <br/>
+        {% if post.post_image %}
+            <img class='img-fluid' src="{{ post.post_image.url }}"></img>
+        {% endif %}
+        <br/>
+    </div>
     <hr></hr>
-    
     <h2>Comments</h2>
 
     {% if not post.comments.all %}
@@ -23,8 +29,7 @@
         {{ comment.body }}
         <br>
         <small>{{ comment.name }} - {{ comment.date_added }}</small>
-        <br>
-        <br>
+        <br><br>
         {% empty %}
         There are no comments yet
         {% endfor %}

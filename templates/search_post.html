@@ -4,14 +4,14 @@
     <h2>Search Post</h2>
     <form method="get" action="{% url 'search_post' %}">
         {{ search_form.as_p }}
-        <button type="submit">Search</button>
+        <button class="btn btn-primary btn-sm" type="submit">Search</button>
     </form>
-
+    </br></br>
     {% if results %}
         <h3>Posts:</h3>
         <ul>
         {% for Post in results %}
-            <li>{{ Post.title }}</li>
+            <li><a href= "{% url 'post_detail' Post.pk %}">{{ Post.title }} </a></li>
         {% endfor %}
         </ul>
     {% else %}

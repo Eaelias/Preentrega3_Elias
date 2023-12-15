@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h1>Categories</h1>
+    <ul>
+        {% for Category in object_list %}
+        <li>
+            <small>{{ Category.category_name }}</small>
+        </li>
+        {% empty %}
+            <a>There are no Categories yet</a>
+        {% endfor %}
+    </ul>
+    
+<a class="btn btn-primary btn-sm" href= "{% url 'add_category' %}">Add Category</a></li>
+{% endblock %}  

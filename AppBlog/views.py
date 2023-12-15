@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Post, Comment, Category
-from .forms import PostForm, SearchForm, CommentForm
+from .forms import PostForm, SearchForm, CommentForm, CategoryForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
@@ -24,7 +24,13 @@ def post(request):
 
 class CategoryList(ListView):
     model = Category
-    template_name = 'category_list.html'
+    template_name = 'AppBlog/category_list.html'
+
+class AddCategory(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'AppBlog/add_category.html'
+    success_url = reverse_lazy('category_list')
 
 def search_post(request):
     search_form = SearchForm(request.GET or None)
@@ -36,7 +42,7 @@ def search_post(request):
 
 class HomeView(ListView):
     model = Post
-    template_name =  'AppBlog/home.html'
+    template_name = 'AppBlog/home.html'
     ordering = ['-id']
 
 class PostDetailView(DetailView):
@@ -47,7 +53,7 @@ class AddPostView(CreateView, LoginRequiredMixin):
     model = Post
     form_class = PostForm
     template_name = 'AppBlog/add_post.html'
-
+# Function to assign user as post author
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -63,12 +69,10 @@ class AddCommentView(CreateView, LoginRequiredMixin):
         return super().form_valid(form)
     success_url = reverse_lazy('home')
 
-#To do Create category selection menu
-
 class EditPostView(UpdateView, LoginRequiredMixin):
     model = Post
     template_name = 'AppBlog/edit_post.html'
-    fields = ['title', 'category', 'body']
+    fields = ['title', 'category_name', 'body']
 
 class DeletePostView(DeleteView):
     model = Post

@@ -82,7 +82,9 @@
                             <h1 class="post-preview">Lists</h1>
                             <ul>
                                 <li><a href="#">Posts</a></li>
+                                <li><a href="{% url 'category_list' %}">Categories</a></li>
                             </ul>
+                            <a class="btn btn-primary btn-sm" href= "{% url 'add_category' %}">Add Category</a></li>
                         {% endblock %}
                     </div>
 
