@@ -1,15 +1,26 @@
 {% extends 'AppBlog/base.html' %}
 
+{% block title %}
+Add Category
+{% endblock %}
+
+{% block heading %}
+Categories
+{% endblock %}
+
+{% block subheading %}
+Create a new category
+{% endblock %}
+
 {% block content %}
     {% if user.is_authenticated %}
-        <h2>Add Category</h2>
-            <form method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button class="btn btn-primary" type="submit">Create Category</button>
-            </form>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
+        <button class="btn btn-primary" type="submit">Create Category</button>
     {% else %}
-    You must be logged in to create a post
+    You must be logged in to create a category
     <br/>
     <small><a class="btn btn-primary btn-sm" href="{% url 'login' %}">Log in</a></small>
     <small><a class="btn btn-primary btn-sm" href="{% url 'register' %}">Register</a></small></br>

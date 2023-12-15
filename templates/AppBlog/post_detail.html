@@ -1,7 +1,18 @@
 {% extends 'AppBlog/base.html' %}
 
+{% block title %}
+{{ post.title}}
+{% endblock %}
+
+{% block heading %}
+{{ post.title }}
+{% endblock %}
+
+{% block subheading %}
+{{ post.category_name }}
+{% endblock %}
+
 {% block content %}
-    <h1> {{ post.title }} </h1>
     <small> By: {{ post.author }} - {{ post.post_date }} 
         {% if user.is_authenticated %}
             {% if user.id == post.author.id %} - 

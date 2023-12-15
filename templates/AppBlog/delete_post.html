@@ -1,5 +1,17 @@
 {% extends 'AppBlog/base.html' %}
 
+{% block title %}
+Delete Post
+{% endblock %}
+
+{% block heading %}
+Delete post
+{% endblock %}
+
+{% block subheading %}
+Delete: {{ post.title }}
+{% endblock %}
+
 {% block content %}
     {% if user.is_authenticated %}
         {% if user.id == post.author.id %}
@@ -7,8 +19,12 @@
                 <form method="POST" action="{% url 'delete_post' post.pk %}">
                     {% csrf_token %}
                     <strong> Are you sure you want to delete {{ post.title }}? </strong>
-                    <button class="btn btn-danger btn-sm" type="submit">Delete Post</button>
+                    <br>
+                    <button class="btn btn-danger btn-sm" type="submit">Yes, Delete Post</button>
                 </form>
+                <br>
+                <a class="btn btn-primary btn-sm" href= "{% url 'home' %}">Cancel</a>
+                <br>
         {% endif %}
     {% endif %}
 {% endblock %}

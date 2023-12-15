@@ -81,16 +81,15 @@
                             </ul>
                             <h1 class="post-preview">Lists</h1>
                             <ul>
-                                <li><a href="#">Posts</a></li>
+                                <li><a href="{% url 'home' %}">Posts</a></li>
                                 <li><a href="{% url 'category_list' %}">Categories</a></li>
                             </ul>
-                            <a class="btn btn-primary btn-sm" href= "{% url 'add_category' %}">Add Category</a></li>
                         {% endblock %}
                     </div>
 
                     <hr class="my-4" />
                     <!-- Pager-->
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href=" {% url 'home' %}"> Return Home</a></div>
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href=" {% url 'home' %}">See all posts</a></div>
                 </div>
             </div>
         </div>

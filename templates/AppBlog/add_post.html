@@ -1,13 +1,24 @@
 {% extends 'AppBlog/base.html' %}
 
+{% block title %}
+Create Post
+{% endblock %}
+
+{% block heading %}
+Post
+{% endblock %}
+
+{% block subheading %}
+Create a new post
+{% endblock %}
+
 {% block content %}
     {% if user.is_authenticated %}
-            <h2>Add Post</h2>
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="btn btn-primary" type="submit">Create</button>
-                </form>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form>
     {% else %}
     You must be logged in to create a post
     <br/>
