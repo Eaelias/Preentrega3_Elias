@@ -72,7 +72,7 @@ class AddCommentView(CreateView, LoginRequiredMixin):
 class EditPostView(UpdateView, LoginRequiredMixin):
     model = Post
     template_name = 'AppBlog/edit_post.html'
-    fields = ['title', 'category_name', 'body']
+    fields = ['title', 'subtitle', 'category_name', 'body']
 
 class DeletePostView(DeleteView):
     model = Post

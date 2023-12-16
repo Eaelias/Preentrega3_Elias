@@ -17,8 +17,9 @@ Create a new category
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Create Category</button>
         </form>
-        <button class="btn btn-primary" type="submit">Create Category</button>
+        
     {% else %}
     You must be logged in to create a category
     <br/>

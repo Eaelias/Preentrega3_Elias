@@ -1,0 +1,16 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Edit user settings</h1>
+        <form method = "POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary btn-sm" type="submit" value="Update User settings">
+        </form>
+
+    {% else %}
+    You must log in to edit settings <br>
+    <a class="btn btn-primary btn-sm" href="{% url 'login' %}">Log In</a></li>
+    {% endif %}
+{% endblock %}  

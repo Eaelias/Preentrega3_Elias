@@ -4,10 +4,11 @@ from .models import Post, Contact, Comment, Category
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'category_name', 'body', 'post_image']
+        fields = ['title', 'subtitle', 'category_name', 'body', 'post_image']
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'subtitle': forms.TextInput(attrs={'class': 'form-control'}),
             'category_name': forms.Select(attrs={'class': 'form-control'}),
             'body': forms.Textarea(attrs={'class': 'form-control'}),
         }

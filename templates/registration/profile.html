@@ -1,14 +1,36 @@
 {% extends 'registration/base.html' %}
 
+{% block heading %}
+{{ user.username }}'s profile
+{% endblock %}
+
+{% block subheading %}
+{{ user.first_name }} {{ user.last_name }}
+{% endblock %}
+
 {% block content %}
-    <h1>Posts</h1>
-    <ul>
-        {% for Post in object_list %}
-            <li><a href= "{% url 'post_detail' Post.pk %}">{{ Post.title }} - {{ Post.author }} - </a>
-                <small><a class="btn btn-outline-secondary btn-sm" href="{% url 'edit_post' Post.pk %}">Edit</a></small>
-                <small><a class="btn btn-outline-danger btn-sm" href="{% url 'delete_post' Post.pk %}">Delete</a></small></br>
-            </li>
-        {% endfor %}
-    </ul>
+    {% if user.profile.profile_pic %}
+        <br/>
+        <img class='img-fluid' src="{{ user.profile.profile_pic.url }}"></img>
+        <br/>
+    {% endif %}
+    <h1>
+        {{ user.username }}
+    </h1>
+    
+    {% if user.first_name %}
+    First name: {{ user.first_name }}
+    <br/> 
+    Last name: {{ user.last_name }}
+    {% else %}
+    No first name has been added
+    {% endif %}
+    {% if user.profile.bio %} 
+    <br/>
+    Bio: {{ user.profile.bio }}
+    <br/>
+    {% else %}
+    No bio has been added
+    {% endif %}
 {% endblock %} 
 
